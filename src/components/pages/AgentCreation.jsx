@@ -14,11 +14,12 @@ const AgentCreation = () => {
   const [testing, setTesting] = useState(false);
   const [testResults, setTestResults] = useState(null);
 
-  const [agentData, setAgentData] = useState({
+const [agentData, setAgentData] = useState({
     name: '',
     description: '',
     category: '',
     icon: 'Bot',
+    profileImage: '',
     price: 5,
     prompts: {
       system: '',
@@ -74,11 +75,65 @@ const AgentCreation = () => {
         [field]: value
       }));
     }
-  };
+};
 
   const handleArrayInput = (field, value, nested = null) => {
     const items = value.split(',').map(item => item.trim()).filter(item => item);
     handleInputChange(field, items, nested);
+  };
+
+  const handleFileUpload = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      // Validate file type
+      if (!file.type.startsWith('image/')) {
+        toast.error('Please select an image file');
+        return;
+      }
+      
+      // Validate file size (max 5MB)
+      if (file.size > 5 * 1024 * 1024) {
+        toast.error('Image size must be less than 5MB');
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setAgentData(prev => ({
+          ...prev,
+          profileImage: e.target.result
+        }));
+        toast.success('Image uploaded successfully');
+      };
+      reader.onerror = () => {
+        toast.error('Failed to read image file');
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleRemoveImage = () => {
+    setAgentData(prev => ({
+      ...prev,
+      profileImage: ''
+    }));
+  };
+
+  const handleDragOver = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+  };
+
+  const handleDrop = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    const files = e.dataTransfer.files;
+    if (files.length > 0) {
+      const file = files[0];
+      const mockEvent = { target: { files: [file] } };
+      handleFileUpload(mockEvent);
+    }
   };
 
   const handleTestAgent = async () => {
@@ -225,28 +280,83 @@ const AgentCreation = () => {
               />
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="space-y-2">
+<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="space-y-4">
                 <label className="block text-sm font-medium text-gray-700">
-                  Icon
+                  Profile Image
                 </label>
-                <div className="grid grid-cols-6 gap-3">
-                  {icons.map((icon) => (
+                
+                {agentData.profileImage ? (
+                  <div className="space-y-3">
+                    <div className="relative w-32 h-32 mx-auto">
+                      <img
+                        src={agentData.profileImage}
+                        alt="Agent profile"
+                        className="w-full h-full object-cover rounded-xl border-2 border-gray-200"
+                      />
+                      <button
+                        onClick={handleRemoveImage}
+                        className="absolute -top-2 -right-2 w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center hover:bg-red-600 transition-colors"
+                      >
+                        <ApperIcon name="X" className="w-3 h-3" />
+                      </button>
+                    </div>
                     <button
-                      key={icon}
-                      onClick={() => handleInputChange('icon', icon)}
-                      className={`w-12 h-12 rounded-lg border-2 flex items-center justify-center transition-all ${
-                        agentData.icon === icon
-                          ? 'border-primary-600 bg-primary-100'
-                          : 'border-gray-200 hover:border-gray-300'
-                      }`}
+                      onClick={() => document.getElementById('profile-image-input').click()}
+                      className="w-full px-4 py-2 text-sm text-primary-600 border border-primary-200 rounded-lg hover:bg-primary-50 transition-colors"
                     >
-                      <ApperIcon name={icon} className={`w-5 h-5 ${
-                        agentData.icon === icon ? 'text-primary-600' : 'text-gray-600'
-                      }`} />
+                      Change Image
                     </button>
-                  ))}
-                </div>
+                  </div>
+                ) : (
+                  <div
+                    onDragOver={handleDragOver}
+                    onDrop={handleDrop}
+                    onClick={() => document.getElementById('profile-image-input').click()}
+                    className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center cursor-pointer hover:border-primary-400 hover:bg-primary-50 transition-all"
+                  >
+                    <ApperIcon name="Upload" className="w-8 h-8 text-gray-400 mx-auto mb-2" />
+                    <p className="text-sm text-gray-600 mb-1">
+                      Click to upload or drag and drop
+                    </p>
+                    <p className="text-xs text-gray-500">
+                      PNG, JPG up to 5MB
+                    </p>
+                  </div>
+                )}
+                
+                <input
+                  id="profile-image-input"
+                  type="file"
+                  accept="image/*"
+                  onChange={handleFileUpload}
+                  className="hidden"
+                />
+                
+                {!agentData.profileImage && (
+                  <div className="space-y-2">
+                    <label className="block text-sm font-medium text-gray-700">
+                      Or choose an icon
+                    </label>
+                    <div className="grid grid-cols-6 gap-3">
+                      {icons.map((icon) => (
+                        <button
+                          key={icon}
+                          onClick={() => handleInputChange('icon', icon)}
+                          className={`w-12 h-12 rounded-lg border-2 flex items-center justify-center transition-all ${
+                            agentData.icon === icon
+                              ? 'border-primary-600 bg-primary-100'
+                              : 'border-gray-200 hover:border-gray-300'
+                          }`}
+                        >
+                          <ApperIcon name={icon} className={`w-5 h-5 ${
+                            agentData.icon === icon ? 'text-primary-600' : 'text-gray-600'
+                          }`} />
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
 
               <Input
@@ -422,9 +532,17 @@ Agent: Great! Tell me about your product and target audience.`}
                 Agent Preview
               </h3>
               
-              <div className="flex items-center space-x-4 mb-4">
-                <div className="w-12 h-12 bg-gradient-primary rounded-xl flex items-center justify-center">
-                  <ApperIcon name={agentData.icon} className="w-6 h-6 text-white" />
+<div className="flex items-center space-x-4 mb-4">
+                <div className="w-12 h-12 bg-gradient-primary rounded-xl flex items-center justify-center overflow-hidden">
+                  {agentData.profileImage ? (
+                    <img
+                      src={agentData.profileImage}
+                      alt={agentData.name}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <ApperIcon name={agentData.icon} className="w-6 h-6 text-white" />
+                  )}
                 </div>
                 <div>
                   <h4 className="font-semibold text-gray-900">{agentData.name}</h4>

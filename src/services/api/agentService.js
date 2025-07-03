@@ -13,6 +13,7 @@ export const getMarketplaceAgents = async () => {
       { field: { Name: "category" } },
       { field: { Name: "price" } },
       { field: { Name: "icon" } },
+      { field: { Name: "profileImage" } },
       { field: { Name: "status" } }
     ],
     where: [
@@ -22,7 +23,6 @@ export const getMarketplaceAgents = async () => {
       { fieldName: "Name", sorttype: "ASC" }
     ]
   };
-
   const response = await apperClient.fetchRecords('agent', params);
   
   if (!response.success) {
@@ -30,13 +30,14 @@ export const getMarketplaceAgents = async () => {
     throw new Error(response.message);
   }
 
-  return response.data.map(agent => ({
+return response.data.map(agent => ({
     Id: agent.Id,
     name: agent.Name || '',
     description: agent.description || '',
     category: agent.category || '',
     price: agent.price || 0,
     icon: agent.icon || 'Bot',
+    profileImage: agent.profileImage || '',
     status: agent.status || 'active'
   }));
 };
@@ -44,13 +45,14 @@ export const getMarketplaceAgents = async () => {
 export const getMyAgents = async () => {
   // For now, return first 4 agents as user's subscribed agents
   // In production, this would filter based on user subscriptions
-  const params = {
+const params = {
     fields: [
       { field: { Name: "Name" } },
       { field: { Name: "description" } },
       { field: { Name: "category" } },
       { field: { Name: "price" } },
       { field: { Name: "icon" } },
+      { field: { Name: "profileImage" } },
       { field: { Name: "status" } }
     ],
     where: [
@@ -58,7 +60,6 @@ export const getMyAgents = async () => {
     ],
     pagingInfo: { limit: 4, offset: 0 }
   };
-
   const response = await apperClient.fetchRecords('agent', params);
   
   if (!response.success) {
@@ -66,13 +67,14 @@ export const getMyAgents = async () => {
     throw new Error(response.message);
   }
 
-  return response.data.map(agent => ({
+return response.data.map(agent => ({
     Id: agent.Id,
     name: agent.Name || '',
     description: agent.description || '',
     category: agent.category || '',
     price: agent.price || 0,
     icon: agent.icon || 'Bot',
+    profileImage: agent.profileImage || '',
     status: agent.status || 'active'
   }));
 };
@@ -92,13 +94,14 @@ export const unsubscribeFromAgent = async (agentId) => {
 };
 
 export const createAgent = async (agentData) => {
-  const params = {
+const params = {
     records: [{
       Name: agentData.name,
       description: agentData.description,
       category: agentData.category,
       price: agentData.price,
       icon: agentData.icon,
+      profileImage: agentData.profileImage || '',
       status: 'active'
     }]
   };

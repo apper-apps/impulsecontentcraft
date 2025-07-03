@@ -38,9 +38,17 @@ const AgentCard = ({
       whileHover={{ scale: 1.02 }}
       className={`bg-white rounded-xl shadow-card p-6 hover:shadow-card-hover transition-all duration-200 ${className}`}
     >
-      <div className="flex items-start justify-between mb-4">
-        <div className="w-12 h-12 bg-gradient-primary rounded-xl flex items-center justify-center">
-          <ApperIcon name={agent.icon} className="w-6 h-6 text-white" />
+<div className="flex items-start justify-between mb-4">
+        <div className="w-12 h-12 bg-gradient-primary rounded-xl flex items-center justify-center overflow-hidden">
+          {agent.profileImage ? (
+            <img
+              src={agent.profileImage}
+              alt={agent.name}
+              className="w-full h-full object-cover"
+            />
+          ) : (
+            <ApperIcon name={agent.icon} className="w-6 h-6 text-white" />
+          )}
         </div>
         <Badge variant={getCategoryColor(agent.category)} size="sm">
           {agent.category}
