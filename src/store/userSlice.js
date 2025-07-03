@@ -7,11 +7,24 @@ const initialState = {
 
 // Selector to get user role
 export const getUserRole = (state) => {
-  const user = state.user.user;
+  // Get user data from Redux state
+  const user = state.user?.user;
   if (!user) return 'user';
   
-  // Extract role from user object - handles various possible structures
-  const role = user.role || user.userRole || 'user';
+  // Extract role from user object - handles various possible structures from Apper auth
+  // Check multiple possible role field names and nested structures
+  let role = 'user';
+  
+  if (user.role) {
+    role = user.role;
+  } else if (user.userRole) {
+    role = user.userRole;
+  } else if (user.profile && user.profile.role) {
+    role = user.profile.role;
+  } else if (user.userData && user.userData.role) {
+    role = user.userData.role;
+  }
+  
   return role.toLowerCase();
 }
 
