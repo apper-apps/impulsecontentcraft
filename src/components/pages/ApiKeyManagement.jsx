@@ -24,10 +24,10 @@ const ApiKeyManagement = () => {
     description: ''
   });
 
-  const providers = [
+const providers = [
     { id: 'openai', name: 'OpenAI', icon: 'Brain' },
     { id: 'anthropic', name: 'Anthropic', icon: 'MessageSquare' },
-    { id: 'google', name: 'Google AI', icon: 'Search' },
+    { id: 'google', name: 'Google Open Router', icon: 'Search' },
     { id: 'cohere', name: 'Cohere', icon: 'Zap' }
   ];
 

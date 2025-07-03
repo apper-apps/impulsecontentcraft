@@ -15,6 +15,18 @@ export const getUserRole = (state) => {
   return role.toLowerCase();
 }
 
+// Selector to check if user is admin
+export const isAdmin = (state) => {
+  const role = getUserRole(state);
+  return role === 'admin' || role === 'superadmin';
+}
+
+// Selector to check if user is superadmin
+export const isSuperAdmin = (state) => {
+  const role = getUserRole(state);
+  return role === 'superadmin';
+}
+
 export const userSlice = createSlice({
   name: 'user',
   initialState,

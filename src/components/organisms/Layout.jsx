@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { Outlet, useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
 import Sidebar from "@/components/organisms/Sidebar";
 import Header from "@/components/organisms/Header";
+import { getUserRole } from "@/store/userSlice";
 
 const Layout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [userRole, setUserRole] = useState('user');
+  const userRole = useSelector(getUserRole);
   const location = useLocation();
 
   const getPageTitle = () => {

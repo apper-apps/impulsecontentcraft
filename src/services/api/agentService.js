@@ -102,6 +102,7 @@ const params = {
       price: agentData.price,
       icon: agentData.icon,
       profileImage: agentData.profileImage || '',
+      model: agentData.settings?.model || 'gpt-3.5-turbo',
       status: 'active'
     }]
   };
