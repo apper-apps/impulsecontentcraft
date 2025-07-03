@@ -1,8 +1,13 @@
-import invoicesData from '@/services/mockData/invoices.json';
+const { ApperClient } = window.ApperSDK;
 
-let invoices = [...invoicesData];
+const apperClient = new ApperClient({
+  apperProjectId: import.meta.env.VITE_APPER_PROJECT_ID,
+  apperPublicKey: import.meta.env.VITE_APPER_PUBLIC_KEY
+});
 
 export const getBillingInfo = async () => {
+  // In production, this would fetch user-specific billing info
+  // For now, return mock data structure
   await new Promise(resolve => setTimeout(resolve, 300));
   
   return {
@@ -23,8 +28,32 @@ export const getBillingInfo = async () => {
 };
 
 export const getInvoices = async () => {
-  await new Promise(resolve => setTimeout(resolve, 250));
-  return [...invoices];
+  const params = {
+    fields: [
+      { field: { Name: "amount" } },
+      { field: { Name: "date" } },
+      { field: { Name: "status" } },
+      { field: { Name: "description" } }
+    ],
+    orderBy: [
+      { fieldName: "date", sorttype: "DESC" }
+    ]
+  };
+
+  const response = await apperClient.fetchRecords('app_invoice', params);
+  
+  if (!response.success) {
+    console.error(response.message);
+    throw new Error(response.message);
+  }
+
+  return response.data.map(invoice => ({
+    Id: invoice.Id,
+    amount: invoice.amount || 0,
+    date: invoice.date || new Date().toLocaleDateString(),
+    status: invoice.status || 'pending',
+    description: invoice.description || ''
+  }));
 };
 
 export const updateSubscription = async (planType) => {
@@ -36,6 +65,7 @@ export const updateSubscription = async (planType) => {
     allinclusive: 50
   };
   
+  // In production, this would update user subscription in database
   return {
     type: planType,
     price: prices[planType],

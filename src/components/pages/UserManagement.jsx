@@ -239,7 +239,7 @@ const UserManagement = () => {
                           <ApperIcon name="User" className="w-5 h-5 text-white" />
                         </div>
                         <div>
-                          <p className="font-medium text-gray-900">{user.name}</p>
+<p className="font-medium text-gray-900">{user.name}</p>
                           <p className="text-sm text-gray-600">{user.email}</p>
                         </div>
                       </div>
@@ -278,7 +278,7 @@ const UserManagement = () => {
                     </td>
                     
                     <td className="py-4 px-6">
-                      <span className="font-medium text-gray-900">{user.agentCount}</span>
+<span className="font-medium text-gray-900">{user.agentCount}</span>
                     </td>
                     
                     <td className="py-4 px-6">

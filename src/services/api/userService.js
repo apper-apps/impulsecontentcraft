@@ -1,26 +1,89 @@
-import usersData from '@/services/mockData/users.json';
+const { ApperClient } = window.ApperSDK;
 
-let users = [...usersData];
+const apperClient = new ApperClient({
+  apperProjectId: import.meta.env.VITE_APPER_PROJECT_ID,
+  apperPublicKey: import.meta.env.VITE_APPER_PUBLIC_KEY
+});
 
 export const getUsers = async () => {
-  await new Promise(resolve => setTimeout(resolve, 400));
-  return [...users];
+  const params = {
+    fields: [
+      { field: { Name: "Name" } },
+      { field: { Name: "email" } },
+      { field: { Name: "role" } },
+      { field: { Name: "subscription" } },
+      { field: { Name: "agent_count" } },
+      { field: { Name: "join_date" } }
+    ],
+    orderBy: [
+      { fieldName: "CreatedOn", sorttype: "DESC" }
+    ]
+  };
+
+  const response = await apperClient.fetchRecords('app_User', params);
+  
+  if (!response.success) {
+    console.error(response.message);
+    throw new Error(response.message);
+  }
+
+  // Transform data to match UI expectations
+  return response.data.map(user => ({
+    Id: user.Id,
+    name: user.Name || '',
+    email: user.email || '',
+    role: user.role || 'user',
+    subscription: user.subscription || 'free',
+    agentCount: user.agent_count || 0,
+    joinDate: user.join_date || new Date().toLocaleDateString()
+  }));
 };
 
 export const updateUserSubscription = async (userId, subscription) => {
-  await new Promise(resolve => setTimeout(resolve, 600));
+  const params = {
+    records: [{
+      Id: parseInt(userId),
+      subscription: subscription
+    }]
+  };
+
+  const response = await apperClient.updateRecord('app_User', params);
   
-  const userIndex = users.findIndex(u => u.Id === userId);
-  if (userIndex !== -1) {
-    users[userIndex] = { ...users[userIndex], subscription };
+  if (!response.success) {
+    console.error(response.message);
+    throw new Error(response.message);
   }
-  
+
+  if (response.results) {
+    const failedRecords = response.results.filter(result => !result.success);
+    if (failedRecords.length > 0) {
+      console.error(`Failed to update ${failedRecords.length} records:${JSON.stringify(failedRecords)}`);
+      throw new Error(failedRecords[0].message || 'Update failed');
+    }
+  }
+
   return { success: true };
 };
 
 export const deleteUser = async (userId) => {
-  await new Promise(resolve => setTimeout(resolve, 500));
+  const params = {
+    RecordIds: [parseInt(userId)]
+  };
+
+  const response = await apperClient.deleteRecord('app_User', params);
   
-  users = users.filter(user => user.Id !== userId);
+  if (!response.success) {
+    console.error(response.message);
+    throw new Error(response.message);
+  }
+
+  if (response.results) {
+    const failedRecords = response.results.filter(result => !result.success);
+    if (failedRecords.length > 0) {
+      console.error(`Failed to delete ${failedRecords.length} records:${JSON.stringify(failedRecords)}`);
+      throw new Error(failedRecords[0].message || 'Delete failed');
+    }
+  }
+
   return { success: true };
 };
