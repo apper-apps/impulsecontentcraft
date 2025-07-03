@@ -1,0 +1,54 @@
+[
+  {
+    "Id": 1,
+    "name": "Production OpenAI Key",
+    "provider": "openai",
+    "key": "sk-proj-abcd1234567890abcdef1234567890abcdef",
+    "description": "Main production key for OpenAI GPT models",
+    "active": true,
+    "createdAt": "2024-11-15T10:00:00Z",
+    "requestsToday": 1247,
+    "totalRequests": 45892,
+    "lastUsed": "2 hours ago",
+    "monthlyCost": "342.67"
+  },
+  {
+    "Id": 2,
+    "name": "Anthropic Claude Key",
+    "provider": "anthropic",
+    "key": "sk-ant-api03-xyz789uvw456rst123opq789lmn456ghi",
+    "description": "Claude 3 for advanced reasoning tasks",
+    "active": true,
+    "createdAt": "2024-11-20T14:30:00Z",
+    "requestsToday": 532,
+    "totalRequests": 18643,
+    "lastUsed": "4 hours ago",
+    "monthlyCost": "156.23"
+  },
+  {
+    "Id": 3,
+    "name": "Development OpenAI Key",
+    "provider": "openai",
+    "key": "sk-proj-dev456789test123456789test123456789",
+    "description": "Development and testing key",
+    "active": false,
+    "createdAt": "2024-10-05T09:15:00Z",
+    "requestsToday": 0,
+    "totalRequests": 8934,
+    "lastUsed": "3 days ago",
+    "monthlyCost": "0.00"
+  },
+  {
+    "Id": 4,
+    "name": "Google AI Key",
+    "provider": "google",
+    "key": "AIzaSyC123456789abcdef123456789abcdef123",
+    "description": "Google AI for specialized tasks",
+    "active": true,
+    "createdAt": "2024-12-01T16:45:00Z",
+    "requestsToday": 234,
+    "totalRequests": 2847,
+    "lastUsed": "1 hour ago",
+    "monthlyCost": "78.45"
+  }
+]

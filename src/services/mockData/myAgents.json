@@ -1,0 +1,38 @@
+[
+  {
+    "Id": 1,
+    "name": "Content Writer Pro",
+    "description": "Expert at creating high-quality blog posts, articles, and web content that engages readers and drives traffic.",
+    "category": "Content Writing",
+    "price": 15,
+    "icon": "Pen",
+    "status": "active"
+  },
+  {
+    "Id": 2,
+    "name": "Social Media Expert",
+    "description": "Specialized in creating engaging social media content and strategies for all major platforms.",
+    "category": "Social Media",
+    "price": 10,
+    "icon": "MessageSquare",
+    "status": "active"
+  },
+  {
+    "Id": 3,
+    "name": "Copywriting Specialist",
+    "description": "Crafts persuasive copy for sales pages, ads, and marketing materials that convert.",
+    "category": "Copywriting",
+    "price": 20,
+    "icon": "Megaphone",
+    "status": "active"
+  },
+  {
+    "Id": 4,
+    "name": "Email Marketing Pro",
+    "description": "Creates compelling email campaigns and newsletter content that drives engagement.",
+    "category": "Email Marketing",
+    "price": 12,
+    "icon": "Mail",
+    "status": "active"
+  }
+]

@@ -1,0 +1,44 @@
+[
+  {
+    "Id": 1,
+    "agentId": 1,
+    "content": "Hi! I'm your Content Writer Pro. How can I help you create amazing content today?",
+    "sender": "agent",
+    "timestamp": "2024-12-10T10:00:00Z"
+  },
+  {
+    "Id": 2,
+    "agentId": 1,
+    "content": "I need help writing a blog post about AI in healthcare.",
+    "sender": "user",
+    "timestamp": "2024-12-10T10:01:00Z"
+  },
+  {
+    "Id": 3,
+    "agentId": 1,
+    "content": "That's a fantastic topic! AI in healthcare is revolutionizing patient care. I'd be happy to help you create a comprehensive blog post. Let me suggest a structure...",
+    "sender": "agent",
+    "timestamp": "2024-12-10T10:01:30Z"
+  },
+  {
+    "Id": 4,
+    "agentId": 2,
+    "content": "Hello! I'm your Social Media Expert. Ready to create some engaging content?",
+    "sender": "agent",
+    "timestamp": "2024-12-10T11:00:00Z"
+  },
+  {
+    "Id": 5,
+    "agentId": 2,
+    "content": "Can you help me create Instagram captions for my tech startup?",
+    "sender": "user",
+    "timestamp": "2024-12-10T11:01:00Z"
+  },
+  {
+    "Id": 6,
+    "agentId": 2,
+    "content": "Absolutely! Instagram captions for tech startups should be innovative, engaging, and showcase your unique value. Let me create some options for you...",
+    "sender": "agent",
+    "timestamp": "2024-12-10T11:01:30Z"
+  }
+]

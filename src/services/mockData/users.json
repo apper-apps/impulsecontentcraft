@@ -1,0 +1,92 @@
+[
+  {
+    "Id": 1,
+    "name": "Sarah Johnson",
+    "email": "sarah@company.com",
+    "role": "user",
+    "subscription": "bundle",
+    "agentCount": 3,
+    "joinDate": "Dec 8, 2024"
+  },
+  {
+    "Id": 2,
+    "name": "Mike Chen",
+    "email": "mike@startup.io",
+    "role": "user",
+    "subscription": "alacarte",
+    "agentCount": 1,
+    "joinDate": "Dec 7, 2024"
+  },
+  {
+    "Id": 3,
+    "name": "Emma Wilson",
+    "email": "emma@agency.com",
+    "role": "user",
+    "subscription": "allinclusive",
+    "agentCount": 8,
+    "joinDate": "Dec 6, 2024"
+  },
+  {
+    "Id": 4,
+    "name": "David Brown",
+    "email": "david@business.net",
+    "role": "user",
+    "subscription": "bundle",
+    "agentCount": 2,
+    "joinDate": "Dec 5, 2024"
+  },
+  {
+    "Id": 5,
+    "name": "Lisa Garcia",
+    "email": "lisa@creative.studio",
+    "role": "admin",
+    "subscription": "allinclusive",
+    "agentCount": 5,
+    "joinDate": "Dec 4, 2024"
+  },
+  {
+    "Id": 6,
+    "name": "James Miller",
+    "email": "james@tech.co",
+    "role": "user",
+    "subscription": "free",
+    "agentCount": 0,
+    "joinDate": "Dec 3, 2024"
+  },
+  {
+    "Id": 7,
+    "name": "Anna Davis",
+    "email": "anna@marketing.pro",
+    "role": "user",
+    "subscription": "bundle",
+    "agentCount": 4,
+    "joinDate": "Dec 2, 2024"
+  },
+  {
+    "Id": 8,
+    "name": "Robert Taylor",
+    "email": "robert@content.hub",
+    "role": "user",
+    "subscription": "alacarte",
+    "agentCount": 2,
+    "joinDate": "Dec 1, 2024"
+  },
+  {
+    "Id": 9,
+    "name": "Maria Rodriguez",
+    "email": "maria@digital.agency",
+    "role": "user",
+    "subscription": "allinclusive",
+    "agentCount": 6,
+    "joinDate": "Nov 30, 2024"
+  },
+  {
+    "Id": 10,
+    "name": "John Smith",
+    "email": "john@example.com",
+    "role": "superadmin",
+    "subscription": "allinclusive",
+    "agentCount": 12,
+    "joinDate": "Nov 29, 2024"
+  }
+]

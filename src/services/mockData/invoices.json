@@ -1,0 +1,37 @@
+[
+  {
+    "Id": 1,
+    "amount": 25,
+    "date": "Nov 15, 2024",
+    "status": "paid",
+    "description": "Bundle Plan - Monthly Subscription"
+  },
+  {
+    "Id": 2,
+    "amount": 25,
+    "date": "Oct 15, 2024",
+    "status": "paid",
+    "description": "Bundle Plan - Monthly Subscription"
+  },
+  {
+    "Id": 3,
+    "amount": 15,
+    "date": "Sep 15, 2024",
+    "status": "paid",
+    "description": "A La Carte - 3 Agents"
+  },
+  {
+    "Id": 4,
+    "amount": 10,
+    "date": "Aug 15, 2024",
+    "status": "paid",
+    "description": "A La Carte - 2 Agents"
+  },
+  {
+    "Id": 5,
+    "amount": 5,
+    "date": "Jul 15, 2024",
+    "status": "paid",
+    "description": "A La Carte - 1 Agent"
+  }
+]

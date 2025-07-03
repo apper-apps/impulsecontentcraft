@@ -1,0 +1,110 @@
+[
+  {
+    "Id": 1,
+    "name": "Content Writer Pro",
+    "description": "Expert at creating high-quality blog posts, articles, and web content that engages readers and drives traffic.",
+    "category": "Content Writing",
+    "price": 15,
+    "icon": "Pen",
+    "status": "active"
+  },
+  {
+    "Id": 2,
+    "name": "Social Media Expert",
+    "description": "Specialized in creating engaging social media content and strategies for all major platforms.",
+    "category": "Social Media",
+    "price": 10,
+    "icon": "MessageSquare",
+    "status": "active"
+  },
+  {
+    "Id": 3,
+    "name": "Copywriting Specialist",
+    "description": "Crafts persuasive copy for sales pages, ads, and marketing materials that convert.",
+    "category": "Copywriting",
+    "price": 20,
+    "icon": "Megaphone",
+    "status": "active"
+  },
+  {
+    "Id": 4,
+    "name": "Email Marketing Pro",
+    "description": "Creates compelling email campaigns and newsletter content that drives engagement.",
+    "category": "Email Marketing",
+    "price": 12,
+    "icon": "Mail",
+    "status": "active"
+  },
+  {
+    "Id": 5,
+    "name": "SEO Optimizer",
+    "description": "Optimizes content for search engines to improve rankings and organic traffic.",
+    "category": "SEO",
+    "price": 18,
+    "icon": "Search",
+    "status": "active"
+  },
+  {
+    "Id": 6,
+    "name": "Video Script Writer",
+    "description": "Creates engaging scripts for videos, tutorials, and promotional content.",
+    "category": "Video Scripts",
+    "price": 14,
+    "icon": "Video",
+    "status": "active"
+  },
+  {
+    "Id": 7,
+    "name": "Blog Post Generator",
+    "description": "Generates comprehensive blog posts on various topics with proper structure.",
+    "category": "Content Writing",
+    "price": 8,
+    "icon": "FileText",
+    "status": "active"
+  },
+  {
+    "Id": 8,
+    "name": "Product Description Writer",
+    "description": "Creates compelling product descriptions that highlight features and benefits.",
+    "category": "Copywriting",
+    "price": 6,
+    "icon": "Package",
+    "status": "active"
+  },
+  {
+    "Id": 9,
+    "name": "Press Release Expert",
+    "description": "Writes professional press releases for product launches and company news.",
+    "category": "Content Writing",
+    "price": 16,
+    "icon": "Newspaper",
+    "status": "active"
+  },
+  {
+    "Id": 10,
+    "name": "Ad Copy Creator",
+    "description": "Develops high-converting ad copy for Google Ads, Facebook, and other platforms.",
+    "category": "Copywriting",
+    "price": 22,
+    "icon": "Target",
+    "status": "active"
+  },
+  {
+    "Id": 11,
+    "name": "LinkedIn Content Specialist",
+    "description": "Creates professional LinkedIn posts and articles for business networking.",
+    "category": "Social Media",
+    "price": 11,
+    "icon": "Briefcase",
+    "status": "active"
+  },
+  {
+    "Id": 12,
+    "name": "Instagram Caption Master",
+    "description": "Writes catchy Instagram captions and hashtag strategies for maximum reach.",
+    "category": "Social Media",
+    "price": 9,
+    "icon": "Camera",
+    "status": "active"
+  }
+]
