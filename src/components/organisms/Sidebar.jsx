@@ -1,8 +1,13 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import ApperIcon from '@/components/ApperIcon';
-import NavigationItem from '@/components/molecules/NavigationItem';
-
+import React, { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import ApperIcon from "@/components/ApperIcon";
+import NavigationItem from "@/components/molecules/NavigationItem";
+import invoicesData from "@/services/mockData/invoices.json";
+import chatHistoryData from "@/services/mockData/chatHistory.json";
+import myAgentsData from "@/services/mockData/myAgents.json";
+import agentsData from "@/services/mockData/agents.json";
+import usersData from "@/services/mockData/users.json";
+import apiKeysData from "@/services/mockData/apiKeys.json";
 const Sidebar = ({ isOpen, onClose, userRole = 'user' }) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
 
@@ -32,10 +37,18 @@ const Sidebar = ({ isOpen, onClose, userRole = 'user' }) => {
     }
 
     return baseNav;
-  };
+};
 
   const navigation = getUserNavigation();
 
+  // Split navigation for mobile sections
+  const userSection = navigation.filter(item => 
+    !item.to.includes('/admin')
+  );
+  
+  const adminSection = navigation.filter(item => 
+    item.to.includes('/admin')
+  );
   // Desktop Sidebar - Static positioning
   const DesktopSidebar = () => (
     <div className={`hidden lg:flex flex-col bg-white border-r border-gray-200 transition-all duration-300 ${
@@ -136,19 +149,44 @@ const Sidebar = ({ isOpen, onClose, userRole = 'user' }) => {
                 </button>
               </div>
 
-              {/* Navigation */}
-              <nav className="flex-1 p-4 space-y-2">
-                {navigation.map((item) => (
-                  <NavigationItem
-                    key={item.to}
-                    to={item.to}
-                    icon={item.icon}
-                    label={item.label}
-                    badge={item.badge}
-                  />
-                ))}
-              </nav>
+{/* Navigation */}
+              <nav className="flex-1 p-4 space-y-1">
+                {/* User Features Section */}
+                <div className="text-xs font-medium text-gray-400 uppercase tracking-wider px-3 py-2">
+                  User Features
+                </div>
+                <div className="space-y-1 mb-6">
+                  {userSection.map((item) => (
+                    <NavigationItem
+                      key={item.to}
+                      to={item.to}
+                      icon={item.icon}
+                      label={item.label}
+                      badge={item.badge}
+                    />
+                  ))}
+                </div>
 
+                {/* Admin Features Section */}
+                {adminSection.length > 0 && (
+                  <>
+                    <div className="text-xs font-medium text-gray-400 uppercase tracking-wider px-3 py-2 border-t border-gray-200 pt-4">
+                      Admin Features
+                    </div>
+                    <div className="space-y-1">
+                      {adminSection.map((item) => (
+                        <NavigationItem
+                          key={item.to}
+                          to={item.to}
+                          icon={item.icon}
+                          label={item.label}
+                          badge={item.badge}
+                        />
+                      ))}
+                    </div>
+                  </>
+                )}
+              </nav>
               {/* User Profile */}
               <div className="p-4 border-t border-gray-200">
                 <div className="flex items-center space-x-3 p-3 rounded-lg bg-gray-50">

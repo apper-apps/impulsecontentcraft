@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
-import { Outlet, useLocation } from 'react-router-dom';
-import Sidebar from '@/components/organisms/Sidebar';
-import Header from '@/components/organisms/Header';
+import React, { useState } from "react";
+import { Outlet, useLocation } from "react-router-dom";
+import Sidebar from "@/components/organisms/Sidebar";
+import Header from "@/components/organisms/Header";
 
 const Layout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [userRole, setUserRole] = useState('user');
   const location = useLocation();
 
   const getPageTitle = () => {
@@ -32,10 +33,10 @@ const Layout = () => {
 
   return (
     <div className="flex h-screen bg-gray-50">
-      <Sidebar 
+<Sidebar 
         isOpen={sidebarOpen} 
         onClose={() => setSidebarOpen(false)}
-        userRole="admin" 
+        userRole={userRole} 
       />
       
       <div className="flex-1 flex flex-col overflow-hidden">

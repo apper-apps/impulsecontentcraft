@@ -5,6 +5,16 @@ const initialState = {
   isAuthenticated: false,
 }
 
+// Selector to get user role
+export const getUserRole = (state) => {
+  const user = state.user.user;
+  if (!user) return 'user';
+  
+  // Extract role from user object - handles various possible structures
+  const role = user.role || user.userRole || 'user';
+  return role.toLowerCase();
+}
+
 export const userSlice = createSlice({
   name: 'user',
   initialState,
