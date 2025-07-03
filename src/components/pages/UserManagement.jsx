@@ -8,15 +8,16 @@ import Loading from '@/components/ui/Loading';
 import Error from '@/components/ui/Error';
 import Empty from '@/components/ui/Empty';
 import ApperIcon from '@/components/ApperIcon';
-import { getUsers, updateUserSubscription, deleteUser } from '@/services/api/userService';
+import { getUsers, updateUserSubscription, updateUserRole, deleteUser } from '@/services/api/userService';
 
 const UserManagement = () => {
   const [users, setUsers] = useState([]);
   const [filteredUsers, setFilteredUsers] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
+const [error, setError] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
   const [updating, setUpdating] = useState(null);
+  const [updatingRole, setUpdatingRole] = useState(null);
 
   useEffect(() => {
     loadUsers();
@@ -66,6 +67,27 @@ const UserManagement = () => {
       toast.error('Failed to update subscription');
     } finally {
       setUpdating(null);
+    }
+};
+
+  const handleUpdateRole = async (userId, newRole, userName) => {
+    if (!confirm(`Are you sure you want to change ${userName}'s role to ${newRole}? This will affect their access permissions.`)) {
+      return;
+    }
+
+    try {
+      setUpdatingRole(userId);
+      await updateUserRole(userId, newRole);
+      setUsers(prev => prev.map(user => 
+        user.Id === userId 
+          ? { ...user, role: newRole }
+          : user
+      ));
+      toast.success('User role updated successfully');
+    } catch (err) {
+      toast.error('Failed to update user role');
+    } finally {
+      setUpdatingRole(null);
     }
   };
 
@@ -244,11 +266,29 @@ const UserManagement = () => {
                         </div>
                       </div>
                     </td>
-                    
-                    <td className="py-4 px-6">
-                      <Badge variant={getRoleColor(user.role)} className="capitalize">
-                        {user.role}
-                      </Badge>
+<td className="py-4 px-6">
+                      <div className="flex items-center space-x-2">
+                        <Badge variant={getRoleColor(user.role)} className="capitalize">
+                          {user.role}
+                        </Badge>
+                        <div className="relative">
+                          <select
+                            value={user.role}
+                            onChange={(e) => handleUpdateRole(user.Id, e.target.value, user.name)}
+                            disabled={updatingRole === user.Id}
+                            className="text-sm border border-gray-200 rounded px-2 py-1 focus:outline-none focus:ring-2 focus:ring-primary-500"
+                          >
+                            <option value="user">User</option>
+                            <option value="admin">Admin</option>
+                            <option value="superadmin">Super Admin</option>
+                          </select>
+                          {updatingRole === user.Id && (
+                            <div className="absolute inset-0 flex items-center justify-center bg-white/80">
+                              <div className="w-4 h-4 border-2 border-primary-500 border-t-transparent rounded-full animate-spin"></div>
+                            </div>
+                          )}
+                        </div>
+                      </div>
                     </td>
                     
                     <td className="py-4 px-6">

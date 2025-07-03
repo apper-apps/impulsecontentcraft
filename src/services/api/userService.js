@@ -64,6 +64,31 @@ export const updateUserSubscription = async (userId, subscription) => {
 
   return { success: true };
 };
+export const updateUserRole = async (userId, role) => {
+  const params = {
+    records: [{
+      Id: parseInt(userId),
+      role: role
+    }]
+  };
+
+  const response = await apperClient.updateRecord('app_User', params);
+  
+  if (!response.success) {
+    console.error(response.message);
+    throw new Error(response.message);
+  }
+
+  if (response.results) {
+    const failedRecords = response.results.filter(result => !result.success);
+    if (failedRecords.length > 0) {
+      console.error(`Failed to update ${failedRecords.length} records:${JSON.stringify(failedRecords)}`);
+      throw new Error(failedRecords[0].message || 'Role update failed');
+    }
+  }
+
+  return { success: true };
+};
 
 export const deleteUser = async (userId) => {
   const params = {
